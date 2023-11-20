@@ -1,36 +1,26 @@
 import React from "react";
-import { View, Text, Image, ScrollView, TextInput, Button } from "react-native";
+import { View, Text, TextInput } from "react-native";
 import { useState } from "react";
 
 const App = () => {
-    return (
-        <>
-            <Cat name="Munkustrap" first={true} />
-            <Cat name="Spot" />
-        </>
-    );
-};
-
-const Cat = (props) => {
-    const [isHungry, setIsHungry] = useState(true);
+    const [text, setText] = useState("");
 
     return (
         <View
             style={{
                 marginHorizontal: 15,
-                marginVertical: props.first ? 40 : 0,
+                marginVertical: 40,
             }}
         >
-            <Text>
-                I am {props.name}, and I am {isHungry ? "hungry!" : "full"}
-            </Text>
-            <Button
-                onPress={() => {
-                    setIsHungry(false);
-                }}
-                disabled={!isHungry}
-                title={isHungry ? "Pour me some milk, please!" : "Thank you!"}
+            <TextInput
+                style={{ height: 40, borderWidth: 1, borderColor: "black" }}
+                onChangeText={newText => setText(newText)}
+                placeholder="Type here to translate!"
+                defaultValue={text}
             />
+            <Text style={{padding: 10, fontSize: 42}}>
+                    {text.split(" ").map((word) => word && "🏝️").join(" ")}
+            </Text>
         </View>
     );
 };
